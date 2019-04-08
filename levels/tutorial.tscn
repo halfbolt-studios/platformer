@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/tileset.res" type="TileSet" id=1]
+[ext_resource path="res://assets/PathAndObjects.png" type="Texture" id=2]
+[ext_resource path="res://player.tscn" type="PackedScene" id=3]
+
+[sub_resource type="PhysicsMaterial" id=1]
+
+[node name="Level" type="Node2D"]
+
+[node name="background" type="Sprite" parent="."]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+collision_use_kinematic = true
+format = 1
+tile_data = PoolIntArray( -65537, 10, 0, -131072, 10, 0, -131071, 10, 0, -131070, 10, 0, -131069, 10, 0, -131068, 10, 0, -131067, 10, 0, -1, 10, 0, -65536, 0, 0, -65535, 1, 0, -65534, 1, 0, -65533, 1, 0, -65532, 2, 0, -65531, 10, 0, -65522, 9, 0, 65535, 10, 0, 0, 3, 0, 1, 4, 0, 2, 4, 0, 3, 4, 0, 4, 5, 0, 5, 10, 0, 131071, 10, 0, 65536, 3, 0, 65537, 4, 0, 65538, 4, 0, 65539, 4, 0, 65540, 5, 0, 65541, 10, 0, 65547, 9, 0, 65549, 9, 0, 196607, 10, 0, 131072, 3, 0, 131073, 4, 0, 131074, 4, 0, 131075, 4, 0, 131076, 5, 0, 131077, 10, 0, 262143, 10, 0, 196608, 3, 0, 196609, 4, 0, 196610, 4, 0, 196611, 4, 0, 196612, 4, 0, 327679, 10, 0, 262144, 3, 0, 262145, 4, 0, 262146, 4, 0, 262147, 4, 0, 262148, 4, 0, 393215, 10, 0, 327680, 3, 0, 327681, 4, 0, 327682, 4, 0, 327683, 4, 0, 327684, 4, 0, 458751, 10, 0, 393216, 3, 0, 393217, 4, 0, 393218, 4, 0, 393219, 4, 0, 393220, 4, 0, 524287, 10, 0, 458752, 6, 0, 458753, 7, 0, 458754, 7, 0, 458755, 7, 0, 458756, 8, 0, 458757, 10, 0, 589823, 10, 0, 524288, 10, 0, 524289, 10, 0, 524290, 10, 0, 524291, 10, 0, 524292, 10, 0, 524293, 10, 0 )
+
+[node name="Bag" type="RigidBody2D" parent="."]
+position = Vector2( 400, 0 )
+physics_material_override = SubResource( 1 )
+gravity_scale = 0.0
+linear_damp = 2.0
+angular_velocity = 20.0
+angular_damp = 2.0
+
+[node name="Sprite" type="Sprite" parent="Bag"]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 352, 256, 32, 32 )
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Bag"]
+polygon = PoolVector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
+
+[node name="player" parent="." instance=ExtResource( 3 )]
+
