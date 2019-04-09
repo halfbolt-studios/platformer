@@ -12,7 +12,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var direction = Vector2()
-
+	
 	if Input.is_action_pressed("ui_down"):
         direction.y += SPEED
 	if Input.is_action_pressed("ui_up"):
@@ -23,5 +23,9 @@ func _process(delta):
         direction.x += SPEED
 	#print("x: " + str(direction.x) + ", y: " + str(direction.y))
 	#set_pos(get_pos() + direction.normalized() * SPEED * delta)
+	#direction = move_and_slide(direction)
 	direction = move_and_slide(direction)
 	pass
+	
+func get_pos():
+	return position	
