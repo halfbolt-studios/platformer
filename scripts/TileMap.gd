@@ -4,7 +4,6 @@ extends TileMap
 # var a = 2
 # var b = "text"
 onready var player = get_parent().get_parent().get_node("player")
-onready var enemy = get_parent().get_parent().get_node("enemy")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,6 +13,6 @@ func _ready():
 #func _process(delta):
 #	pass
 
-func get_path_to_player():
+func get_path_to_player(enemy):
 	var path = get_parent().get_simple_path(player.position, enemy.position)
 	return path
