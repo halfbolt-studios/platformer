@@ -44,7 +44,7 @@ func _process(delta):
 	else:
 		path = level.get_path_to_player(self)
 	#refresh path if player has moved from its previous tile
-	if (player.position.distance_to(path[0]) > 16):
+	if (path.size() > 0 and player.position.distance_to(path[0]) > 17):
 		path = level.get_path_to_player(self)
 	pass
 
@@ -52,4 +52,3 @@ func _process(delta):
 func _draw():
 	for index in range(len(path) - 1):
 		draw_line(Vector2(path[index].x - position.x, path[index].y - position.y), Vector2(path[index + 1].x - position.x, path[index + 1].y - position.y), Color(255, 0, 0), 1)
-	
