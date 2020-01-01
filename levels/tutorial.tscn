@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/tileset.res" type="TileSet" id=1]
 [ext_resource path="res://scripts/TileMap.gd" type="Script" id=2]
@@ -7,9 +7,6 @@
 [ext_resource path="res://enemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/lantern.gd" type="Script" id=6]
 [ext_resource path="res://assets/LightMask.png" type="Texture" id=7]
-
-[sub_resource type="PhysicsMaterial" id=2]
-friction = 0.0
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 15, 15 )
@@ -42,25 +39,22 @@ polygon = PoolVector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
 
 [node name="player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 229.772, 146.961 )
+collision_layer = 2
 
 [node name="enemy" parent="." instance=ExtResource( 5 )]
 position = Vector2( 370.901, 213.443 )
+collision_layer = 4
+collision_mask = 5
 
 [node name="enemy2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 69.1972, 37.9559 )
+collision_layer = 4
+collision_mask = 5
 
-[node name="lantern" type="RigidBody2D" parent="."]
-editor/display_folded = true
+[node name="lantern" type="KinematicBody2D" parent="."]
 position = Vector2( 144.147, 132.151 )
-mode = 2
-physics_material_override = SubResource( 2 )
-gravity_scale = 0.0
-linear_damp = 20.0
-angular_damp = 20.0
+collision_layer = 8
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="lantern"]
 shape = SubResource( 3 )
@@ -69,6 +63,8 @@ shape = SubResource( 3 )
 texture = ExtResource( 7 )
 range_item_cull_mask = 2
 shadow_enabled = true
+shadow_filter = 2
+shadow_filter_smooth = 20.0
 
 [node name="Sprite" type="Sprite" parent="lantern"]
 texture = ExtResource( 3 )

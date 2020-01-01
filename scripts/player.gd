@@ -21,7 +21,7 @@ func _physics_process(delta_time):
     var reflect = collision.remainder.bounce(collision.normal)
     if collision.collider is TileMap:
       move_and_collide(reflect)
-    if collision.collider is KinematicBody2D:
+    elif collision.collider is KinematicBody2D:
       # make other body move in same direction at slower speed
       collision.collider.move_and_collide((delta - delta.slide(collision.normal)) * slow_down)
       # push player out of other object, but not as much, so that you push it along

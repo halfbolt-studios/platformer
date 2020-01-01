@@ -1,23 +1,17 @@
-extends RigidBody2D
+extends KinematicBody2D
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-onready var targetPosition = get_parent().get_node("player").position
-const SPEED = 200
+export var speed = 200
+
+var target_position
 var direction = Vector2()
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+  target_position = get_parent().get_node("player").position
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if (Input.is_action_pressed("ui_select")):
-		targetPosition = get_global_mouse_position()
-	direction = (targetPosition - position).normalized()
-	if (position.distance_to(targetPosition) > 10):
-		#move_and_slide(direction * SPEED)
-		apply_impulse(Vector2(), direction * SPEED)
-	pass
-	
+func _physics_process(delta):
+  if Input.is_action_just_pressed("move_lantern"):
+    var mouse_position = get_node("/root").get_mouse_position()
+    target_position = get_node("/root/container/viewport").get_canvas_transform().inverse() * mouse_position
+  direction = (target_position - position).normalized()
+  if position.distance_to(target_position) > 10:
+    move_and_slide(direction * speed)
