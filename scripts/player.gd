@@ -14,5 +14,5 @@ func _physics_process(delta_time):
     delta.x += -1
   if Input.is_action_pressed("move_right"):
     delta.x += 1
-  delta = delta.normalized() * speed * delta_time
+  delta = delta.normalized() * speed
   move_and_slide(delta)
